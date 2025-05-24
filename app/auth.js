@@ -8,17 +8,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
-          scope: "openid email profile"
-        }
-      }
+          scope: "openid email profile",
+        },
+      },
     }),
   ],
   callbacks: {
     async jwt({ token, account, user, profile }) {
       // Initial sign in
       if (account && user) {
-        console.log('Google Profile Data:', profile);
-        
+        console.log("Google Profile Data:", profile);
+
         return {
           ...token,
           accessToken: account.access_token,
@@ -56,16 +56,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       };
     },
     async signIn({ user, account, profile }) {
-      console.log('Sign in successful:', {
+      console.log("Sign in successful:", {
         user: user.email,
-        provider: account.provider
+        provider: account.provider,
       });
       return true;
     },
   },
   pages: {
-    signIn: '/auth',
-    error: '/auth/error',
+    signIn: "/auth",
+    error: "/auth/error",
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
 });

@@ -28,15 +28,14 @@ export default function SignIn() {
     try {
       setIsLoading(true);
       setError("");
-      
+
       // Use automatic redirect - this will handle the OAuth flow completely
-      await signIn('google', {
+      await signIn("google", {
         callbackUrl,
       });
-      
     } catch (error) {
-      console.error('Sign in error:', error);
-      setError('An unexpected error occurred. Please try again.');
+      console.error("Sign in error:", error);
+      setError("An unexpected error occurred. Please try again.");
       setIsLoading(false);
     }
   };
