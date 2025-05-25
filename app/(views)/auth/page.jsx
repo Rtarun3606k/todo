@@ -33,6 +33,10 @@ export default function SignIn() {
       await signIn("google", {
         callbackUrl,
       });
+
+      const register = await fetch(`/api/user`);
+
+      // setIsLoading(false);
     } catch (error) {
       console.error("Sign in error:", error);
       setError("An unexpected error occurred. Please try again.");

@@ -14,6 +14,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      try {
+        // We'll handle user creation/updating in the API route instead
+        // to avoid middleware context issues with Mongoose schemas
+        console.log("Sign in attempt:", {
+          user: user.email,
+          provider: account.provider,
+          googleId: profile.sub,
+        });
+        return true;
+      } catch (error) {
+        console.error("Error in signIn callback:", error);
+        return false;
+      }
+    },
     async jwt({ token, account, user, profile }) {
       // Initial sign in
       if (account && user) {
@@ -55,17 +70,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         accessToken: token.accessToken,
       };
     },
-    async signIn({ user, account, profile }) {
-      console.log("Sign in successful:", {
-        user: user.email,
-        provider: account.provider,
-      });
-      return true;
-    },
   },
   pages: {
     signIn: "/auth",
     error: "/auth/error",
   },
-  debug: process.env.NODE_ENV === "development",
+  // debug:false  process.env.NODE_ENV === "development",
+  debug: false,
 });
