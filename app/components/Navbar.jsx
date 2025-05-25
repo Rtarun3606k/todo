@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/home", icon: FiHome, label: "Home" },
-    { href: "/todos", icon: FiCheckSquare, label: "Todos" },
+    // { href: "/todos", icon: FiCheckSquare, label: "Todos" },
     { href: "/add-todo", icon: FiPlus, label: "Add Todo" },
     { href: "/profile", icon: FiUser, label: "Profile" },
   ];
